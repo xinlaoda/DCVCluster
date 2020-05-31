@@ -70,7 +70,11 @@ def lambda_handler(event, context):
             
                 # Dry run succeeded, call stop_instances without dryrun
                 try:
-                    _response = ec2.stop_instances(InstanceIds=[ec2_id], DryRun=False)
+                    _response = ec2.stop_instances(
+                        InstanceIds=[ec2_id], 
+                        DryRun=False,
+                        Hibernate=True
+                        )
                     print(_response)
                     response = _response["StoppingInstances"]
                 except ClientError as e:
